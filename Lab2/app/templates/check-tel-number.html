@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Форма с обработкой ошибок</h1>
+
+<div class="card">
+    <!-- Заголовок формы -->
+    <div class="card-header">
+        <p>Введите номер телефона в форматах:</p>
+        <ul>
+            <li>+7 (***) ***-**-**</li>
+            <li>8(***)*******</li>
+            <li>***.***.**.**</li>
+        </ul>
+    </div>
+    <!-- Форма для ввода номера телефона -->
+    <form method="post" class="card-body">
+        <div class="mb-3 card-text">
+            <!-- Если был передан параметр error, то устанавливается .is-invalid -->
+            <input type="tel" class="form-control {% if error %}is-invalid{% endif %}" name="number"
+                value="{{ request.form['number'] }}" required>
+            <!-- Если был передан параметр error, то устанавливается описание ошибки -->
+            {% if error %}
+            <div class="invalid-feedback">
+                {{ error }}
+            </div>
+            {% endif %}
+        </div>
+        <!-- Кнопка для отправки запроса -->
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+
+<!-- Если метод запроса POST -->
+{% if request.method == 'POST' %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Введенный номер</th>
+            <th>Результат преобразования</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <!-- Передача данных с поля формы number -->
+            <td>{{ request.form['number'] }}</td>
+            <td>
+                <!-- Если был передан параметр number, то устанавливается 
+                    номер телефона преобразованный в единый формат -->
+                {% if number %}
+                {{ number }}
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

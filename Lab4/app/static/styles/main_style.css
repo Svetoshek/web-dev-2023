@@ -1,0 +1,14 @@
+/* "Корневые" элементы и их ближайшие дочерние элементы */
+
+body {
+	min-height: 100vh;
+}
+
+footer {
+	min-height: 40px;
+}
+
+table {
+    width: auto !important;
+}
+

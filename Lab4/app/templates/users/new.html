@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% from 'users/form.html' import user_form %}
+
+{% block content %}
+<h2 class="my-3">Добавление нового пользователя</h2>
+
+{{ user_form(user, url_for('create_user'), roles_list, error_list) }}
+
+{% endblock %}

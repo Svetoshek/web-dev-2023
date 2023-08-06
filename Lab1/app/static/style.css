@@ -1,0 +1,33 @@
+
+body {
+	min-height: 100vh;
+}
+
+
+.header *,
+.footer * {
+	font-size: 1rem;
+}
+
+.footer {
+	min-height: 50px;
+}
+
+/* Стили по умолчанию */
+main,
+section {
+	margin-top: 1rem !important;
+}
+
+/* Стили для изображений */
+.img-style-default {
+	max-width: 100%;
+}
+
+/* Стили для комментариев */
+
+.comment-style-default,
+.comment-in-style-default {
+	padding: 1rem 2.6rem;
+	border-radius: 1.5rem;
+}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-center">Сведения о пользователе {{user.first_name}} {{user.middle_name or ''}} {{user.last_name}} </h2>
+<div class="d-flex justify-content-center">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                    Идентификатор
+                </td>
+                <td>
+                    {{user.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Логин
+                </td>
+                <td>
+                    {{user.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Фамилия
+                </td>
+                <td>
+                    {{user.last_name}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Имя
+                </td>
+                <td>
+                    {{user.first_name}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Отчество
+                </td>
+                <td>
+                    {{user.middle_name or ''}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Роль
+                </td>
+                <td>
+                    {{user.role_name or ''}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex justify-content-center">
+    <a href="{{url_for('users')}}" class="btn btn-primary">Список пользователей</a>
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>
+    <!-- Получение значения количества посещений из глобального объекта session -->
+    Вы посетили данную страницу {{session['visits_count']}} раз.
+</p>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!-- Наследование шаблона -->
+{% extends 'base.html' %}
+<!-- Модификация шаблона -->
+{% block content %}
+
+<!-- Заголовок поста -->
+<h1>{{title}}</h1>
+<!-- Сведения об авторе и дата публикации поста -->
+<section id="section-author-and-date">
+    <div class="d-flex justify-content-between">
+        <p class="fs-4">Автор: {{post.author}}</p>
+        <p class="fs-4">Дата и время публикации: {{post.date.strftime('%d.%m.%Y %H:%M')}}</p>
+    </div>
+</section>
+<!-- Содержание поста -->
+<section id="section-content-of-post">
+    <!-- Изображение к посту -->
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-xl-8">
+            <img class="img-style-default" src="{{ url_for('static', filename='images/' ~ post.img_id ~ '.jpg') }}"
+                alt="">
+        </div>
+    </div>
+    <!-- Текст поста -->
+    <section id="text-of-the-post">
+        <p class="fs-4">{{post.text}}</p>
+    </section>
+</section>
+<!-- Форма для публикации комментария к посту -->
+<section id="section-comment-form">
+    <!-- Форма "Оставьте комментарий" с полем для ввода текста и кнопкой "Отправить" -->
+    <div class="card">
+        <div class="card-header">Оставьте комментарий</div>
+        <form action="{{ url_for('post', post_id=post.index) }}" class=" card-body" method="post">
+            <div class="mb-3 card-text">
+                <!-- Поле для ввода текста 
+                Заполнение обязательно, чтобы нельзя было отправить пустые комментарии -->
+                <textarea class="form-control" style="height: 100px" name="comment" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
+</section>
+<!-- Коммантарии и ответы к ним -->
+<section id="comments">
+    <!-- Отображение каждого комментария -->
+    {% for comment in post.comments %}
+    <div class="d-flex mb-3 comment-style-default">
+        <div class="flex-shrink-0">
+            <img width="50px" src="{{ url_for('static', filename='images/' ~ 'avatar.jpg') }}"
+                class="rounded-circle img-style-default" alt="Avatar">
+        </div>
+        <div class="flex-grow-1 ms-3">
+            <h5>{{ comment.author }} <small class="text-muted"><i>Posted on {{ comment.date.strftime('%d.%m.%Y %H:%M')
+                        }}</i></small></h5>
+            <p>{{ comment.text }}</p>
+            <!-- Если есть ответы на коммментарий -->
+            {% if comment.reply %}
+            <!-- То отображается каждый ответ -->
+            {% for comment in comment.reply %}
+            <div class="d-flex justify-content-start mt-3 comment-in-style-default">
+                <div class="flex-shrink-0">
+                    <img width="50px" src="{{ url_for('static', filename='images/' ~ 'avatar.jpg') }}"
+                        class="rounded-circle img-style-default" alt="Avatar">
+                </div>
+                <div style="margin-left: 10px;">
+                    <h5>{{ comment.author }} <small class="text-muted"><i>Posted on {{ comment.date.strftime('%d.%m.%Y
+                                %H:%M') }}</i></small></h5>
+                    <p>{{ comment.text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Об авторе</h1>
+<section id="about-author">
+	<div class="row">
+		<div class="col-12 col-md-4">
+			<img class="rounded-circle img-style-default " src="{{ url_for('static', filename='images/avatar.jpg') }}">
+		</div>
+		<div class="col-12 col-md-8 d-flex flex-column justify-content-center">
+			<p class="fs-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non quod ducimus eos officia quidem saepe
+				delectus iste. Voluptas veniam minus tempora saepe, itaque dignissimos possimus deleniti porro quae,
+				unde soluta.</p>
+		</div>
+	</div>
+</section>
+{% endblock %}
